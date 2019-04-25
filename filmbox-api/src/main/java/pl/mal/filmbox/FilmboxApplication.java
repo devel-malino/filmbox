@@ -8,6 +8,7 @@ public class FilmboxApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(FilmboxApplication.class, args);
+        System.out.println("test git");
     }
 
 }
