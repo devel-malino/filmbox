@@ -1,29 +1,97 @@
+buildscript {
+    ext {
+        springBootVersion = '2.1.4.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath "net.ltgt.gradle:gradle-apt-plugin:0.17"
+    }
+}
 plugins {
-    id 'org.springframework.boot' version '2.1.4.RELEASE'
-    id 'java'
+    id 'org.hidetake.swagger.generator' version '2.12.0'
 }
 
+swaggerSources {
+    filmbox {
+        inputFile = file('openapi/filmbox/filmboxapi.yaml')
+        code {
+            language = 'spring'
+            configFile = file('openapi/filmbox/config.json')
+        }
+    }
+}
+
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'net.ltgt.apt'
 
 group = 'pl.mal'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '12'
+sourceCompatibility = 12
+targetCompatibility = 12
 
-configurations {
-    compileOnly {
-        extendsFrom annotationProcessor
-    }
-}
+compileJava.dependsOn swaggerSources.filmbox.code
+
+eclipseClasspath.dependsOn  swaggerSources.filmbox.code
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation('org.springframework.boot:spring-boot-starter-data-jpa')
+    implementation('org.springframework.boot:spring-boot-starter-web')
+    runtimeOnly('mysql:mysql-connector-java')
     compileOnly 'org.projectlombok:lombok'
-    runtimeOnly 'mysql:mysql-connector-java'
     annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
+
+    compile group: 'org.hibernate', name: 'hibernate-core', version: '5.3.6.Final'
+    compile group: 'org.hibernate', name: 'hibernate-entitymanager', version: '5.3.6.Final'
+
+    compile group: 'javax.xml.bind', name: 'jaxb-api', version: '2.1'
+
+    compile group: 'com.google.code.gson', name: 'gson', version: '2.8.5'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.9.6'
+    compile group: 'com.squareup.okio', name: 'okio', version: '1.13.0'
+    compile group: 'org.threeten', name: 'threetenbp', version: '1.3.6'
+    compile group: 'com.squareup.okhttp', name: 'okhttp', version: '2.7.5'
+    compile group: 'com.squareup.okhttp', name: 'logging-interceptor', version: '2.7.5'
+    compile group: 'io.gsonfire', name: 'gson-fire', version: '1.8.0'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile group: 'com.github.joschi.jackson', name: 'jackson-datatype-threetenbp', version: '2.6.4'
+
+    compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.7.0'
+    compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.7.0'
+
+    swaggerCodegen 'io.swagger:swagger-codegen-cli:2.3.1'
+}
+
+task processAdditionalResources( type: Copy ) {
+    group "Build"
+    description "Dodatkowe przetwarzanie zasobow"
+    into 'build/additional-resources/static/api-docs/v1'
+}
+
+classes.dependsOn processAdditionalResources
+
+sourceSets {
+    main {
+        java {
+            srcDirs = [
+                    'src/main/java',
+                    "${swaggerSources.filmbox.code.outputDir}/src/main/java",
+            ]
+        }
+    }
 }

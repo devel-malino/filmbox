@@ -1,0 +1,10 @@
+{
+  "invokerPackage": "pl.mal.filmbox.generated",
+  "modelPackage": "pl.mal.filmbox.generated.model",
+  "apiPackage": "pl.mal.filmbox.generated.definition",
+  "configPackage": "pl.mal.filmbox.generated.config",
+  "interfaceOnly": true,
+  "serializableModel": true,
+  "java8": true,
+  "usingSwaggerUI": true
+}

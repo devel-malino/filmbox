@@ -1,0 +1,42 @@
+swagger: "2.0"
+info:
+  description: "New user local api."
+  version: "1.0.0"
+  title: "Swagger Filmbox"
+basePath: "/v1"
+tags:
+  - name: "film"
+    description: "Operations on film"
+schemes:
+  - "http"
+paths:
+  "/film":
+    get:
+      tags:
+        - "film"
+      summary: "Find all films"
+      operationId: "findAllFilms"
+      responses:
+        '200':
+          'description': 'OK'
+          'schema':
+            'type': array
+            'items':
+              $ref: "#/definitions/FilmDto"
+        '400':
+          'description': 'Bad request'
+        '404':
+          'description': 'Objects not found'
+        '500':
+          'description': 'Local server issue'
+definitions:
+  FilmDto:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+        description: "Film id"
+      name:
+        type: "string"
+        description: "Film name"
