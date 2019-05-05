@@ -15,7 +15,32 @@ paths:
       tags:
         - "film"
       summary: "Find all films"
-      operationId: "findAllFilms"
+      operationId: "findAll"
+      responses:
+        '200':
+          'description': 'OK'
+          'schema':
+            'type': array
+            'items':
+              $ref: "#/definitions/FilmDto"
+        '400':
+          'description': 'Bad request'
+        '404':
+          'description': 'Objects not found'
+        '500':
+          'description': 'Local server issue'
+  "/film/search":
+    get:
+      tags:
+        - "film"
+      summary: "Find films by text, returns all with query name"
+      operationId: "findAllByNameContaining"
+      parameters:
+        - name: text
+          in: query
+          description: Searching films by text
+          required: false
+          type: string
       responses:
         '200':
           'description': 'OK'

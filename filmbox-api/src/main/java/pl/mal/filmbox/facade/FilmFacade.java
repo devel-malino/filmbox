@@ -7,4 +7,5 @@ import java.util.List;
 public interface FilmFacade {
 
     List<FilmDto> findAll();
+    List<FilmDto> findAllByNameContaining(String text);
 }

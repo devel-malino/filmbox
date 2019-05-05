@@ -21,4 +21,9 @@ public class FilmFacadeImpl implements FilmFacade {
     public List<FilmDto> findAll() {
         return filmConverter.filmDaoListToFilmDtoList(filmService.findAll());
     }
+
+    @Override
+    public List<FilmDto> findAllByNameContaining(String text) {
+        return filmConverter.filmDaoListToFilmDtoList(filmService.findAllByNameContaining(text));
+    }
 }

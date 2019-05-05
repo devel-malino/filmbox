@@ -20,4 +20,9 @@ public class FilmServiceImpl implements FilmService {
     public List<FilmDao> findAll() {
         return filmRepository.findAll();
     }
+
+    @Override
+    public List<FilmDao> findAllByNameContaining(String text) {
+        return filmRepository.findAllByNameContaining(text);
+    }
 }
