@@ -1,5 +1,6 @@
 package pl.mal.filmbox.model;
 
+import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.Entity;
@@ -11,6 +12,7 @@ import java.io.Serializable;
 @Entity(name = "film")
 @Data
 @Table(name = "films")
+@Builder
 public class FilmDao implements Serializable {
 
     @Id
