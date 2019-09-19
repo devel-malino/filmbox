@@ -11,11 +11,25 @@ import {MaterialModuleImporter} from './material-module-importer';
 import { FilmboxComponent } from './filmbox/filmbox.component';
 import {AppRoutingModule} from './app-routing.module';
 import {RouterModule} from '@angular/router';
+import { MainToolbarComponent } from './main-toolbar/main-toolbar.component';
+import { MainContainerComponent } from './main-container/main-container.component';
+import { MainFooterComponent } from './main-footer/main-footer.component';
+import { MoviesComponent } from './filmbox/movies/movies.component';
+import { SerialsComponent } from './filmbox/serials/serials.component';
+import { GamesComponent } from './filmbox/games/games.component';
+import { RankingsComponent } from './filmbox/rankings/rankings.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FilmboxComponent
+    FilmboxComponent,
+    MainToolbarComponent,
+    MainContainerComponent,
+    MainFooterComponent,
+    MoviesComponent,
+    SerialsComponent,
+    GamesComponent,
+    RankingsComponent
   ],
   imports: [
     RouterModule,
