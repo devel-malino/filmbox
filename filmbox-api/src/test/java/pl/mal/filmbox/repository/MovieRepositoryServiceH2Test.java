@@ -5,25 +5,26 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import pl.mal.filmbox.model.FilmDao;
+import pl.mal.filmbox.model.MovieDao;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import static junit.framework.TestCase.assertTrue;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-public class FilmRepositoryServiceH2Test {
+public class MovieRepositoryServiceH2Test {
 
     @Autowired
-    private FilmRepository filmRepository;
+    private MovieRepository movieRepository;
 
     @Test
     public void testRepo() {
 
-        filmRepository.save(FilmDao.builder().name("dziala").build());
+        movieRepository.save(new MovieDao(null, "dziala", "Bardzo dobry film", LocalDate.now(), LocalDate.ofYearDay(2019, 32)));
 
-        List<FilmDao> filmDaoList = filmRepository.findAllByNameContaining("d");
+        List<MovieDao> movieDaoList = movieRepository.findAllByNameContaining("d");
 
         assertTrue(true);
     }

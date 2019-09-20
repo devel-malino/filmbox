@@ -5,6 +5,7 @@ import {MoviesComponent} from './filmbox/movies/movies.component';
 import {SerialsComponent} from './filmbox/serials/serials.component';
 import {GamesComponent} from './filmbox/games/games.component';
 import {RankingsComponent} from './filmbox/rankings/rankings.component';
+import {MovieItemComponent} from './filmbox/movies/movie-item/movie-item.component';
 
 const appRoutes: Routes = [
   {
@@ -22,6 +23,10 @@ const appRoutes: Routes = [
   {
     path: 'rankings',
     component: RankingsComponent
+  },
+  {
+    path: 'movies/:id',
+    component: MovieItemComponent
   }
 ];
 const routes: Routes = [

@@ -1,3 +1,20 @@
-<p>
-  movies works!
-</p>
+<button mat-raised-button routerLink="0"> Dodaj film </button>
+<table mat-table [dataSource]="data" style="width: 100%">
+
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> Identyfikator </th>
+    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Nazwa. </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="worldReleaseDate">
+    <th mat-header-cell *matHeaderCellDef> Data wydania na świecie </th>
+    <td mat-cell *matCellDef="let element"> {{element.worldReleaseDate}} </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;" routerLink="{{row.id}}"></tr>
+</table>

@@ -5,16 +5,16 @@ info:
   title: "Swagger Filmbox"
 basePath: "/v1"
 tags:
-  - name: "film"
-    description: "Operations on film"
+  - name: "movie"
+    description: "Operations on movie"
 schemes:
   - "http"
 paths:
-  "/film":
+  "/movie":
     get:
       tags:
-        - "film"
-      summary: "Find all films"
+        - "movie"
+      summary: "Find all movies"
       operationId: "findAll"
       responses:
         '200':
@@ -22,23 +22,48 @@ paths:
           'schema':
             'type': array
             'items':
-              $ref: "#/definitions/FilmDto"
+              $ref: "#/definitions/MovieDto"
         '400':
           'description': 'Bad request'
         '404':
           'description': 'Objects not found'
         '500':
           'description': 'Local server issue'
-  "/film/search":
+  "/movie/{id}":
     get:
       tags:
-        - "film"
-      summary: "Find films by text, returns all with query name"
+        - "movie"
+      summary: "Find specific movie by id"
+      operationId: "findById"
+      parameters:
+        - name: id
+          in: path
+          type: number
+          required: true
+          description: "Searching movies by specific id"
+      responses:
+        '200':
+          'description': 'OK'
+          'schema':
+            'type': object
+            'items':
+              $ref: "#/definitions/MovieDto"
+        '400':
+          'description': 'Bad request'
+        '404':
+          'description': 'Objects not found'
+        '500':
+          'description': 'Local server issue'
+  "/movie/search":
+    get:
+      tags:
+        - "movie"
+      summary: "Find movies by text, returns all with query name"
       operationId: "findAllByNameContaining"
       parameters:
         - name: text
           in: query
-          description: Searching films by text
+          description: Searching movies by text
           required: false
           type: string
       responses:
@@ -47,7 +72,7 @@ paths:
           'schema':
             'type': array
             'items':
-              $ref: "#/definitions/FilmDto"
+              $ref: "#/definitions/MovieDto"
         '400':
           'description': 'Bad request'
         '404':
@@ -55,7 +80,7 @@ paths:
         '500':
           'description': 'Local server issue'
 definitions:
-  FilmDto:
+  MovieDto:
     type: "object"
     properties:
       id:
@@ -65,3 +90,12 @@ definitions:
       name:
         type: "string"
         description: "Film name"
+      description:
+        type: "string"
+        description: "Film description"
+      worldReleaseDate:
+        type: "string"
+        description: "Release date"
+      polishReleaseDate:
+        type: "string"
+        description: "Release date in Poland"

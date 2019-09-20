@@ -1,0 +1,27 @@
+<mat-card-content>
+  <div *ngIf="loadingData">
+    Trwa ładowanie danych
+  </div>
+  <div *ngIf="!loadingData">
+    <form [formGroup]="form">
+      <div>
+        <mat-form-field style="width: 100%">
+          <input matInput formControlName="name" type="text" placeholder="Nazwa filmu" required>
+        </mat-form-field>
+        <mat-form-field style="width: 100%">
+          <input matInput formControlName="description" type="text" placeholder="Opis">
+        </mat-form-field>
+        <mat-form-field style="width: 100%">
+          <input matInput [matDatepicker]="pickerWorldReleaseDate" formControlName="worldReleaseDate" placeholder="Data wydania na świecie">
+          <mat-datepicker-toggle matSuffix [for]="pickerWorldReleaseDate"></mat-datepicker-toggle>
+          <mat-datepicker #pickerWorldReleaseDate></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field style="width: 100%">
+          <input matInput [matDatepicker]="pickerPolishReleaseDate" formControlName="polishReleaseDate" placeholder="Data wydania w Polsce">
+          <mat-datepicker-toggle matSuffix [for]="pickerPolishReleaseDate"></mat-datepicker-toggle>
+          <mat-datepicker #pickerPolishReleaseDate></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </form>
+  </div>
+</mat-card-content>

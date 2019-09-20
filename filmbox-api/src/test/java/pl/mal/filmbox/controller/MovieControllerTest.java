@@ -14,7 +14,7 @@ import static org.springframework.mock.http.server.reactive.MockServerHttpReques
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class FilmControllerTest {
+public class MovieControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
