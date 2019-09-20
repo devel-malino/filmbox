@@ -3,7 +3,7 @@
     Trwa ładowanie danych
   </div>
   <div *ngIf="!loadingData">
-    <form [formGroup]="form">
+    <form [formGroup]="form" (ngSubmit)="save()">
       <div>
         <mat-form-field style="width: 100%">
           <input matInput formControlName="name" type="text" placeholder="Nazwa filmu" required>
@@ -21,6 +21,9 @@
           <mat-datepicker-toggle matSuffix [for]="pickerPolishReleaseDate"></mat-datepicker-toggle>
           <mat-datepicker #pickerPolishReleaseDate></mat-datepicker>
         </mat-form-field>
+      </div>
+      <div mat-dialog-actions align="center">
+        <button mat-raised-button color="primary" cdkFocusInitial>Zapisz</button>
       </div>
     </form>
   </div>

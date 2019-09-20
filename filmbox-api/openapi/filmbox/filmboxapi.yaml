@@ -29,6 +29,50 @@ paths:
           'description': 'Objects not found'
         '500':
           'description': 'Local server issue'
+    post:
+      tags:
+        - "movie"
+      summary: "Create new movie"
+      operationId: "create"
+      parameters:
+        - name: movie
+          in: body
+          required: true
+          "schema":
+            $ref: "#/definitions/MovieDto"
+      responses:
+        '200':
+          'description': 'OK'
+          'schema':
+            $ref: "#/definitions/MovieDto"
+        '400':
+          'description': 'Bad request'
+        '404':
+          'description': 'Objects not found'
+        '500':
+          'description': 'Local server issue'
+    put:
+      tags:
+        - "movie"
+      summary: "Update movie"
+      operationId: "update"
+      parameters:
+        - name: movie
+          in: body
+          required: true
+          "schema":
+            $ref: "#/definitions/MovieDto"
+      responses:
+        '200':
+          'description': 'OK'
+          'schema':
+            $ref: "#/definitions/MovieDto"
+        '400':
+          'description': 'Bad request'
+        '404':
+          'description': 'Objects not found'
+        '500':
+          'description': 'Local server issue'
   "/movie/{id}":
     get:
       tags:

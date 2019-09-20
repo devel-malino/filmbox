@@ -7,6 +7,10 @@ import java.util.List;
 public interface MovieService {
 
     List<MovieDao> findAll();
+
     List<MovieDao> findAllByNameContaining(String text);
+
     MovieDao findById(Long id);
+
+    MovieDao save(MovieDao movieDao);
 }

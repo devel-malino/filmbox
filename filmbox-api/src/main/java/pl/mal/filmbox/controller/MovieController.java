@@ -4,10 +4,9 @@ import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.mal.filmbox.facade.MovieFacade;
 import pl.mal.filmbox.generated.definition.MovieApi;
 import pl.mal.filmbox.generated.model.MovieDto;
@@ -19,6 +18,7 @@ import java.util.List;
 @RestController
 @Log
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class MovieController implements MovieApi {
 
     private final MovieFacade movieFacade;
@@ -31,6 +31,16 @@ public class MovieController implements MovieApi {
     @Override
     public ResponseEntity<List<MovieDto>> findAll() {
         return ResponseEntity.ok(movieFacade.findAll());
+    }
+
+    @Override
+    public ResponseEntity<MovieDto> create(@Valid MovieDto movie) {
+        return new ResponseEntity<MovieDto>(this.movieFacade.create(movie), HttpStatus.CREATED);
+    }
+
+    @Override
+    public ResponseEntity<MovieDto> update(@ApiParam(value = "" ,required=true )  @Valid @RequestBody MovieDto movie) {
+        return ResponseEntity.ok(this.movieFacade.update(movie));
     }
 
     @Override

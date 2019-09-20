@@ -12,10 +12,19 @@ export class ApiService {
     this.baseUrl = this.serverUrl + objectUrl;
   }
   get<G>(url?: string) {
+    return this.http.get<G>(this.fullUrl(url));
+  }
+  post<G>(object?: any, url?: string) {
+    return this.http.post<G>(this.fullUrl(url), object);
+  }
+  update<G>(object: any, url?: string) {
+    return this.http.put<G>(this.fullUrl(url), object);
+  }
+  fullUrl(url?: string): string {
     let base = this.baseUrl;
     if (url) {
       base += '/' + url;
     }
-    return this.http.get<G>(base);
+    return base;
   }
 }

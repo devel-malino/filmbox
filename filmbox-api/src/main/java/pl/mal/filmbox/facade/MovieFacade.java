@@ -7,6 +7,12 @@ import java.util.List;
 public interface MovieFacade {
 
     List<MovieDto> findAll();
+
     MovieDto findById(Long id);
+
     List<MovieDto> findAllByNameContaining(String text);
+
+    MovieDto create(MovieDto movie);
+
+    MovieDto update(MovieDto movie);
 }

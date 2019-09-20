@@ -31,4 +31,14 @@ public class MovieFacadeImpl implements MovieFacade {
     public List<MovieDto> findAllByNameContaining(String text) {
         return movieConverter.filmDaoListToMovieDtoList(movieService.findAllByNameContaining(text));
     }
+
+    @Override
+    public MovieDto create(MovieDto movie) {
+        return movieConverter.movieDaoToMovieDto(movieService.save(movieConverter.movieDtoToMovieDao(movie)));
+    }
+
+    @Override
+    public MovieDto update(MovieDto movie) {
+        return movieConverter.movieDaoToMovieDto(movieService.save(movieConverter.movieDtoToMovieDao(movie)));
+    }
 }
